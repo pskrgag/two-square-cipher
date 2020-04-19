@@ -95,28 +95,54 @@ void MainWindow::text_entered(){
                     QPropertyAnimation* left_anim1 = new QPropertyAnimation(left[first_pos.first*6 + first_pos.second], "color", this);
                     left_anim1->setStartValue(QColor(0,255,0));
                     left_anim1->setEndValue(def);
-                    left_anim1->setDuration(3000);
+                    left_anim1->setDuration(12000);
                     left_anim1->start(QAbstractAnimation::DeleteWhenStopped); //first open text
+                    left_anim1->setEasingCurve(QEasingCurve::InElastic);
+                    {
+                        auto start = std::chrono::system_clock::now();
+                        auto end = std::chrono::system_clock::now();
+                        while((std::chrono::duration_cast<std::chrono::seconds>(end - start).count() != 3)){
+                                end = std::chrono::system_clock::now();
+                                QCoreApplication::processEvents();
+                        }
 
-                    while (left_anim1->state() != QAbstractAnimation::Stopped) QCoreApplication::processEvents();
-
-
+                    }
                     QPropertyAnimation* right_anim1 = new QPropertyAnimation(right[second_pos.first*6 + second_pos.second], "color", this);
                     right_anim1->setStartValue(QColor(255,0,0));
                     right_anim1->setEndValue(def);
-                    right_anim1->setDuration(3000);
+                    right_anim1->setDuration(9000);
                     right_anim1->start(QAbstractAnimation::DeleteWhenStopped); //second open text
+                    right_anim1->setEasingCurve(QEasingCurve::InElastic);
+                    {
+                        auto start = std::chrono::system_clock::now();
+                        auto end = std::chrono::system_clock::now();
+                        while((std::chrono::duration_cast<std::chrono::seconds>(end - start).count() != 3)){
+                                end = std::chrono::system_clock::now();
+                                QCoreApplication::processEvents();
+                        }
 
-                    while (right_anim1->state() != QAbstractAnimation::Stopped) QCoreApplication::processEvents();
+                    }
+
+                   // while (right_anim1->state() != QAbstractAnimation::Stopped) QCoreApplication::processEvents();
 
                     QPropertyAnimation* right_anim = new QPropertyAnimation(right[first_pos.first*6 + second_pos.second], "color", this);
                     right_anim->setStartValue(QColor(7,59,7));
                     right_anim->setEndValue(def);
-                    right_anim->setDuration(3000);
+                    right_anim->setDuration(6000);
                     right_anim->start(QAbstractAnimation::DeleteWhenStopped); //first cipher text
+                    right_anim->setEasingCurve(QEasingCurve::InElastic);
+                    {
+                        auto start = std::chrono::system_clock::now();
+                        auto end = std::chrono::system_clock::now();
+                        while((std::chrono::duration_cast<std::chrono::seconds>(end - start).count() != 3)){
+                                end = std::chrono::system_clock::now();
+                                QCoreApplication::processEvents();
+                        }
+
+                    }
 
 
-                    while (right_anim->state() != QAbstractAnimation::Stopped) QCoreApplication::processEvents();
+                   // while (right_anim->state() != QAbstractAnimation::Stopped) QCoreApplication::processEvents();
                     output->insertPlainText(right[first_pos.first*6 + second_pos.second]->text().at(3));
 
                     QPropertyAnimation* left_anim = new QPropertyAnimation(left[second_pos.first*6 + first_pos.second], "color", this);
@@ -124,6 +150,7 @@ void MainWindow::text_entered(){
                     left_anim->setEndValue(def);
                     left_anim->setDuration(3000);
                     left_anim->start(QAbstractAnimation::DeleteWhenStopped); //second cipher text
+                    left_anim->setEasingCurve(QEasingCurve::InElastic);
 
                     while (left_anim->state() != QAbstractAnimation::Stopped) QCoreApplication::processEvents();
                     output->insertPlainText(left[second_pos.first*6 + first_pos.second]->text().at(3));
@@ -138,25 +165,52 @@ void MainWindow::text_entered(){
                    QPropertyAnimation* left_anim = new QPropertyAnimation(left[second_pos.first*6 + first_pos.second], "color", this);
                    left_anim->setStartValue(QColor(0,255,0));
                    left_anim->setEndValue(def);
-                   left_anim->setDuration(3000);
+                   left_anim->setDuration(12000);
                    left_anim->start(QAbstractAnimation::DeleteWhenStopped); //first open
-                   while (left_anim->state() != QAbstractAnimation::Stopped) QCoreApplication::processEvents();
+                   left_anim->setEasingCurve(QEasingCurve::InElastic);
+                   {
+                       auto start = std::chrono::system_clock::now();
+                       auto end = std::chrono::system_clock::now();
+                       while((std::chrono::duration_cast<std::chrono::seconds>(end - start).count() != 3)){
+                               end = std::chrono::system_clock::now();
+                               QCoreApplication::processEvents();
+                       }
+
+                   }
 
 
                    QPropertyAnimation* right_anim1 = new QPropertyAnimation(right[second_pos.first*6 + second_pos.second], "color", this);
                    right_anim1->setStartValue(QColor(255,0,0));
                    right_anim1->setEndValue(def);
-                   right_anim1->setDuration(3000);
+                   right_anim1->setDuration(9000);
                    right_anim1->start(QAbstractAnimation::DeleteWhenStopped); //second open
-                   while (right_anim1->state() != QAbstractAnimation::Stopped) QCoreApplication::processEvents();
+                   right_anim1->setEasingCurve(QEasingCurve::InElastic);
+                   {
+                       auto start = std::chrono::system_clock::now();
+                       auto end = std::chrono::system_clock::now();
+                       while((std::chrono::duration_cast<std::chrono::seconds>(end - start).count() != 3)){
+                               end = std::chrono::system_clock::now();
+                               QCoreApplication::processEvents();
+                       }
+
+                   }
 
 
                    QPropertyAnimation* left_anim1 = new QPropertyAnimation(right[first_pos.first*6 + first_pos.second], "color", this);
                    left_anim1->setStartValue(QColor(7,59,7));
                    left_anim1->setEndValue(def);
-                   left_anim1->setDuration(3000);
+                   left_anim1->setDuration(6000);
                    left_anim1->start(QAbstractAnimation::DeleteWhenStopped); //first cipher
-                   while (left_anim1->state() != QAbstractAnimation::Stopped) QCoreApplication::processEvents();
+                   left_anim1->setEasingCurve(QEasingCurve::InElastic);
+                   {
+                       auto start = std::chrono::system_clock::now();
+                       auto end = std::chrono::system_clock::now();
+                       while((std::chrono::duration_cast<std::chrono::seconds>(end - start).count() != 3)){
+                               end = std::chrono::system_clock::now();
+                               QCoreApplication::processEvents();
+                       }
+
+                   }
                    output->insertPlainText(right[first_pos.first*6 + first_pos.second]->text().at(3));
 
                    QPropertyAnimation* right_anim = new QPropertyAnimation(left[first_pos.first*6 + second_pos.second], "color", this);
@@ -164,6 +218,7 @@ void MainWindow::text_entered(){
                    right_anim->setEndValue(def);
                    right_anim->setDuration(3000);
                    right_anim->start(QAbstractAnimation::DeleteWhenStopped); //secon cipher
+                   right_anim->setEasingCurve(QEasingCurve::InElastic);
                    while (right_anim->state() != QAbstractAnimation::Stopped) QCoreApplication::processEvents();
                    output->insertPlainText(left[first_pos.first*6 + second_pos.second]->text().at(3));
 
@@ -181,24 +236,51 @@ void MainWindow::text_entered(){
                    QPropertyAnimation* left_anim = new QPropertyAnimation(left[second_pos.first*6 + first_pos.second], "color", this);
                    left_anim->setStartValue(QColor(0,255,0));
                    left_anim->setEndValue(def);
-                   left_anim->setDuration(3000);
+                   left_anim->setDuration(12000);
                    left_anim->start(QAbstractAnimation::DeleteWhenStopped); //first open
-                   while (left_anim->state() != QAbstractAnimation::Stopped) QCoreApplication::processEvents();
+                   left_anim->setEasingCurve(QEasingCurve::InElastic);
+                   {
+                       auto start = std::chrono::system_clock::now();
+                       auto end = std::chrono::system_clock::now();
+                       while((std::chrono::duration_cast<std::chrono::seconds>(end - start).count() != 3)){
+                               end = std::chrono::system_clock::now();
+                               QCoreApplication::processEvents();
+                       }
+
+                   }
 
 
                    QPropertyAnimation* right_anim1 = new QPropertyAnimation(right[second_pos.first*6 + second_pos.second], "color", this);
                    right_anim1->setStartValue(QColor(255,0,0));
                    right_anim1->setEndValue(def);
-                   right_anim1->setDuration(3000);
+                   right_anim1->setDuration(9000);
                    right_anim1->start(QAbstractAnimation::DeleteWhenStopped); //second open
-                   while (right_anim1->state() != QAbstractAnimation::Stopped) QCoreApplication::processEvents();
+                   right_anim1->setEasingCurve(QEasingCurve::InElastic);
+                   {
+                       auto start = std::chrono::system_clock::now();
+                       auto end = std::chrono::system_clock::now();
+                       while((std::chrono::duration_cast<std::chrono::seconds>(end - start).count() != 3)){
+                               end = std::chrono::system_clock::now();
+                               QCoreApplication::processEvents();
+                       }
+
+                   }
 
                    QPropertyAnimation* right_anim = new QPropertyAnimation(right[second_pos.first*6 + second_pos.second], "color", this);
                    right_anim->setStartValue(QColor(7,59,7));
                    right_anim->setEndValue(def);
-                   right_anim->setDuration(3000);
+                   right_anim->setDuration(6000);
                    right_anim->start(QAbstractAnimation::DeleteWhenStopped); //second open
-                   while (right_anim->state() != QAbstractAnimation::Stopped) QCoreApplication::processEvents();
+                   right_anim->setEasingCurve(QEasingCurve::InElastic);
+                   {
+                       auto start = std::chrono::system_clock::now();
+                       auto end = std::chrono::system_clock::now();
+                       while((std::chrono::duration_cast<std::chrono::seconds>(end - start).count() != 3)){
+                               end = std::chrono::system_clock::now();
+                               QCoreApplication::processEvents();
+                       }
+
+                   }
                    output->insertPlainText(right[second_pos.first*6 + second_pos.second]->text().at(3));
 
 
@@ -207,6 +289,7 @@ void MainWindow::text_entered(){
                    left_anim1->setEndValue(def);
                    left_anim1->setDuration(3000);
                    left_anim1->start(QAbstractAnimation::DeleteWhenStopped); //first open
+                   left_anim1->setEasingCurve(QEasingCurve::InElastic);
                    while (left_anim1->state() != QAbstractAnimation::Stopped) QCoreApplication::processEvents();
                    output->insertPlainText(left[second_pos.first*6 + second_pos.second]->text().at(3));
 

@@ -13,6 +13,7 @@
 #include <QMessageBox>
 #include <QPropertyAnimation>
 #include <QCoreApplication>
+#include <QAbstractAnimation>
 
 class MyLabel : public QLabel{
     Q_OBJECT
