@@ -15,14 +15,18 @@ static std::pair<int, int> find_symbol(const QVector<MyLabel*> vec, char symbol)
 MainWindow::MainWindow():
     left(36),
     right(36),
-    input(new QPlainTextEdit(this)),
-    input_text(new QPushButton("Enter text", this)),
-    output(new QPlainTextEdit(this))
+    input(new QPlainTextEdit(this)),   
+    output(new QPlainTextEdit(this)),
+    input_text(new QPushButton("Enter text", this))
 {
+
+    std::cout << palette().color(QWidget::backgroundRole()).name().toStdString() << std::endl;
+
+
     output->setReadOnly(true);
     connect(input_text, &QPushButton::clicked, this, &MainWindow::text_entered);
-    resize(639, 478);
-    setMinimumSize(639, 566);
+    resize(700, 478);
+    setMinimumSize(700, 566);
     for(int i = 0; i < 36; ++i){
         if(i < 26){
             left[i] = new MyLabel(QString("   " + QString(i + 65)) , this);
@@ -37,8 +41,9 @@ MainWindow::MainWindow():
             left[i] = new MyLabel("    ", this);
         }
     }
-    std::shuffle(left.begin(), left.end(), std::mt19937(std::random_device()()));
-    std::shuffle(right.begin(), right.end(), std::mt19937(std::random_device()()));
+    srand(time(0));
+    std::random_shuffle(left.begin(), left.end());
+    std::random_shuffle(right.begin(), right.end());
 
 }
 void MainWindow::resizeEvent(QResizeEvent *){
@@ -58,10 +63,10 @@ void MainWindow::paintEvent(QPaintEvent *){
     for(int i = 0; i < 6; ++i){
         for(int j = 0; j < 6; ++j){
             paint.drawRect(width()/7 + j*mini_square_size, square_size + mini_square_size*i, mini_square_size, mini_square_size);
-            left[6*i + j]->setGeometry(width()/7 + j*mini_square_size + 1.5, square_size + mini_square_size*i +1.5 , mini_square_size - 2.5, mini_square_size - 2.5);
+            left[6*i + j]->setGeometry(width()/7 + j*mini_square_size + 2, square_size + mini_square_size*i + 2 , mini_square_size - 2.5, mini_square_size - 2.5);
             left[6*i + j]->show();
             paint.drawRect(width()/7 + square_size + width() / 5 + j*mini_square_size, square_size + mini_square_size*i, mini_square_size, mini_square_size);
-            right[6*i + j]->setGeometry(width()/7 + square_size + width() / 5 + j*mini_square_size + 1.5,  square_size + mini_square_size*i + 1.5, mini_square_size - 2.5, mini_square_size - 2.5);
+            right[6*i + j]->setGeometry(width()/7 + square_size + width() / 5 + j*mini_square_size + 2,  square_size + mini_square_size*i + 2, mini_square_size - 2.5, mini_square_size - 2.5);
             right[6*i + j]->show();
         }
 
@@ -78,7 +83,7 @@ void MainWindow::text_entered(){
         std::string text = input->toPlainText().toStdString();
         input->setReadOnly(true);
         input_text->setDisabled(true);
-        for(int i = 0; i < text.size(); i+=2){
+        for(std::size_t i = 0; i < text.size(); i+=2){
                char first = text[i];
                char second = text[i+1];
                auto first_pos = find_symbol(left, first);
@@ -233,10 +238,11 @@ void MainWindow::text_entered(){
 
                else if(first_pos.first == second_pos.first &&
                        first_pos.second == second_pos.second){
+
                    QPropertyAnimation* left_anim = new QPropertyAnimation(left[second_pos.first*6 + first_pos.second], "color", this);
                    left_anim->setStartValue(QColor(0,255,0));
                    left_anim->setEndValue(def);
-                   left_anim->setDuration(12000);
+                   left_anim->setDuration(9000);
                    left_anim->start(QAbstractAnimation::DeleteWhenStopped); //first open
                    left_anim->setEasingCurve(QEasingCurve::InElastic);
                    {
@@ -253,7 +259,7 @@ void MainWindow::text_entered(){
                    QPropertyAnimation* right_anim1 = new QPropertyAnimation(right[second_pos.first*6 + second_pos.second], "color", this);
                    right_anim1->setStartValue(QColor(255,0,0));
                    right_anim1->setEndValue(def);
-                   right_anim1->setDuration(9000);
+                   right_anim1->setDuration(3000);
                    right_anim1->start(QAbstractAnimation::DeleteWhenStopped); //second open
                    right_anim1->setEasingCurve(QEasingCurve::InElastic);
                    {
@@ -266,9 +272,12 @@ void MainWindow::text_entered(){
 
                    }
 
-                   QPropertyAnimation* right_anim = new QPropertyAnimation(right[second_pos.first*6 + second_pos.second], "color", this);
-                   right_anim->setStartValue(QColor(7,59,7));
-                   right_anim->setEndValue(def);
+
+
+                   QPropertyAnimation* right_anim = new QPropertyAnimation(right[second_pos.first*6 + second_pos.second], "palete", this);
+
+                   right_anim->setStartValue(1);
+                   right_anim->setEndValue(-1);
                    right_anim->setDuration(6000);
                    right_anim->start(QAbstractAnimation::DeleteWhenStopped); //second open
                    right_anim->setEasingCurve(QEasingCurve::InElastic);
@@ -283,10 +292,9 @@ void MainWindow::text_entered(){
                    }
                    output->insertPlainText(right[second_pos.first*6 + second_pos.second]->text().at(3));
 
-
-                   QPropertyAnimation* left_anim1 = new QPropertyAnimation(left[second_pos.first*6 + first_pos.second], "color", this);
-                   left_anim1->setStartValue(QColor(79,11,11));
-                   left_anim1->setEndValue(def);
+                   QPropertyAnimation* left_anim1 = new QPropertyAnimation(left[second_pos.first*6 + first_pos.second], "palete", this);
+                   left_anim1->setStartValue(-100);
+                   left_anim1->setEndValue(-1);
                    left_anim1->setDuration(3000);
                    left_anim1->start(QAbstractAnimation::DeleteWhenStopped); //first open
                    left_anim1->setEasingCurve(QEasingCurve::InElastic);
