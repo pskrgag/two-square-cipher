@@ -15,15 +15,29 @@
 #include <QCoreApplication>
 #include <QAbstractAnimation>
 #include <iostream>
+#include <QRadioButton>
+
+
+
+#define FIRST_OPEN QColor(0,255,0)
+#define SECOND_OPEN QColor(255,0,0)
+#define FIRST_CIPHER QColor(7,59,7)
+#define SECOND_CIPHER QColor(79,11,11)
+
+#define START_GRAD "rgb(0,255,0)"
+#define END_GRAD "rgb(255,0,0)"
+
+
+
 
 class MyLabel : public QLabel{
     Q_OBJECT
     Q_PROPERTY(QColor color READ color WRITE setColor)
     Q_PROPERTY(int palete READ pallete WRITE setPallete)
 
-    QString first = "* {background: qlineargradient( x1:0 y1:0, x2:1 y2:0, stop:0 rgb(0,255,0), stop:1 rgb(255,0,0));}";
+    QString first = QString("* {background: qlineargradient( x1:0 y1:0, x2:1 y2:0, stop:0 ") + QString(START_GRAD) + ", stop:1 " + END_GRAD + ");}";
     QString def = "background-color:#f0f0f0";
-    QString second = "* {background: qlineargradient( x1:0 y1:0, x2:1 y2:0, stop:0 rgb(255,0,0), stop:1 rgb(0,255,0));}";
+    QString second = QString("* {background: qlineargradient( x1:0 y1:0, x2:1 y2:0, stop:0 ") + QString(END_GRAD) + " , stop:1 " + START_GRAD + ");}";
 
  public:
     MyLabel(QWidget *parent = 0):QLabel(parent){}
@@ -75,12 +89,16 @@ class MainWindow : public QWidget
     QPlainTextEdit* input;
     QPlainTextEdit* output;
     QPushButton* input_text;
+    QPushButton* rand_but;
+    QRadioButton* but1;
+    QRadioButton* but2;
 public:
     MainWindow();
     void paintEvent(QPaintEvent* );
     void resizeEvent(QResizeEvent* );
 public slots:
     void text_entered();
+    void sq_shuffle();
 };
 
 
