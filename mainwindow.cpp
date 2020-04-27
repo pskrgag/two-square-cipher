@@ -19,10 +19,10 @@ MainWindow::MainWindow():
     right(36),
     input(new QPlainTextEdit(this)),   
     output(new QPlainTextEdit(this)),
-    input_text(new QPushButton("Вперед", this)),
-    rand_but(new QPushButton("Перемешать", this)),
-    but1(new QRadioButton("шифровать", this)),
-    but2(new QRadioButton("дешифровать", this))
+    input_text(new QPushButton("Input text", this)),
+    rand_but(new QPushButton("Shuffle", this)),
+    but1(new QRadioButton("Crypt", this)),
+    but2(new QRadioButton("Encrypt", this))
 {
 
     std::cout << palette().color(QWidget::backgroundRole()).name().toStdString() << std::endl;
@@ -90,12 +90,22 @@ void MainWindow::paintEvent(QPaintEvent *){
 
     for(int i = 0; i < 6; ++i){
         for(int j = 0; j < 6; ++j){
+#ifdef _WIN32
             paint.drawRect(j*mini_square_size, square_size + mini_square_size*i, mini_square_size, mini_square_size);
             left[6*i + j]->setGeometry(j*mini_square_size + 2, square_size + mini_square_size*i + 2 , mini_square_size - 2.5, mini_square_size - 2.5);
             left[6*i + j]->show();
             paint.drawRect(square_size + 700 / 5 + j*mini_square_size, square_size + mini_square_size*i, mini_square_size, mini_square_size);
             right[6*i + j]->setGeometry( square_size + 700 / 5 + j*mini_square_size + 2,  square_size + mini_square_size*i + 2, mini_square_size - 2.5, mini_square_size - 2.5);
             right[6*i + j]->show();
+#endif
+#ifdef linux
+            paint.drawRect(j*mini_square_size, square_size + mini_square_size*i, mini_square_size, mini_square_size);
+            left[6*i + j]->setGeometry(j*mini_square_size + 1.5, square_size + mini_square_size*i + 1.5 , mini_square_size - 2.5, mini_square_size - 2.5);
+            left[6*i + j]->show();
+            paint.drawRect(square_size + 700 / 5 + j*mini_square_size, square_size + mini_square_size*i, mini_square_size, mini_square_size);
+            right[6*i + j]->setGeometry( square_size + 700 / 5 + j*mini_square_size + 1.5,  square_size + mini_square_size*i + 1.5, mini_square_size - 2.5, mini_square_size - 2.5);
+            right[6*i + j]->show();
+#endif
         }
 
     }
